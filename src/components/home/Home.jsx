@@ -30,7 +30,7 @@ class Home extends Component {
         fetch(para)
         .then(res => res.json())
         .then(res => {
-            // console.log(res);
+            console.log(res);
             this.setState({
                 movies: [...this.state.movies, res.results],
                 heroImage: this.state.heroImage || res.results[0],
@@ -56,8 +56,12 @@ class Home extends Component {
     render() {
         return (
             <div style={{marginBottom: '100px'}}>
-                <MainImagePart />
-                <SearchBar />
+                {this.state.heroImage ? 
+                    <div>
+                        <MainImagePart heroImage={this.state.heroImage}/>
+                        <SearchBar />
+                    </div> : null
+                }
                 <Grid />
                 <Spinner />
                 <LoadMore />
