@@ -26,6 +26,22 @@ class Home extends Component {
         this.fetchDatas(end_point);
     }
 
+    searchItems = (searchTerm) => {
+        let end_point = '';
+        this.setState({
+            movies: [],
+            loading: true,
+            searchTerm
+        });
+
+        if(searchTerm === ''){
+            end_point = `https://api.themoviedb.org/3/movie/popular?api_key=${this.api_key}&language=en-US&page=1`;
+        } else {
+            end_point = `https://api.themoviedb.org/3/movie/popular?api_key=${this.api_key}&language=en-US&query=${this.state.searchTerm}`;
+        }
+        this.fetchDatas(end_point);
+    }
+
     fetchDatas = (para) => {
         fetch(para)
         .then(res => res.json())
@@ -59,7 +75,7 @@ class Home extends Component {
                 {this.state.heroImage ? 
                     <div>
                         <MainImagePart heroImage={this.state.heroImage}/>
-                        <SearchBar />
+                        <SearchBar callback={this.searchItems} />
                     </div> : null
                 }
                 <Grid />
