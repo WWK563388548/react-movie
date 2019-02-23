@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
+import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faSearch } from '@fortawesome/free-solid-svg-icons'
 import {
     SearchBarWrapper,
     SearchBarContent,
     SearchBarInput,    
 } from './style';
 
-
+library.add(faSearch);
 class SearchBar extends Component {
     timeout = null;
     state = {
@@ -33,7 +35,7 @@ class SearchBar extends Component {
                             top: '12px',
                             color: '#fff',
                         }} 
-                        icon="search" 
+                        icon={["fas", "search"]}
                         size="2x"
                     />
                     <SearchBarInput value={this.state.value} onChange={this.doSearch} type="text" placeholder="Search" />
