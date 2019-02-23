@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
+import {
+    Thumb,
+} from './style';
 
 class MovieThumb extends Component {
 
     render() {
       return (
         <div>
-            MovieThumb
+            <Thumb src={this.props.image} alt="Movie thumb"/>
         </div>
       );
     }
