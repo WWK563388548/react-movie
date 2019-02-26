@@ -5,6 +5,10 @@ import Grid from './components/grid/Grid';
 import MovieThumb from './components/movieThumb/MovieThumb';
 import Spinner from './components/spinner/Spinner';
 import LoadMore from './components/loadMore/LoadMore';
+import {
+    HomeGrid,
+} from './home_style';
+import NoImage from './no_image.jpg'
 
 
 class Home extends Component {
@@ -37,7 +41,7 @@ class Home extends Component {
         if(searchTerm === ''){
             end_point = `https://api.themoviedb.org/3/movie/popular?api_key=${this.api_key}&language=en-US&page=1`;
         } else {
-            end_point = `https://api.themoviedb.org/3/movie/popular?api_key=${this.api_key}&language=en-US&query=${this.state.searchTerm}`;
+            end_point = `https://api.themoviedb.org/3/search/movie?api_key=${this.api_key}&query=${this.state.searchTerm}&page=1`;
         }
         this.fetchDatas(end_point);
     }
@@ -78,10 +82,26 @@ class Home extends Component {
                         <SearchBar callback={this.searchItems} />
                     </div> : null
                 }
-                <Grid />
-                <Spinner />
-                <LoadMore />
-        
+                <HomeGrid>
+                    {this.state.movies[0] && 
+                        <Grid 
+                            header={this.state.searchTerm ? 'Search Result' : 'Popular Movies'}
+                            loading={this.state.loading}
+                        >
+                            {this.state.movies[0].map((element, id) => {
+                                return (
+                                    <MovieThumb
+                                        key={id}
+                                        clickable={true}
+                                        image={element.poster_path ? `http://image.tmdb.org/t/p/w500${element.poster_path}` : NoImage}
+                                        movieId={element.id}
+                                        movieName={element.original_title}
+                                    />
+                                )
+                            })}
+                        </Grid>}
+                </HomeGrid>
+    
             </div>
         );
     }
