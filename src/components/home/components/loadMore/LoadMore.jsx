@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
+import LoadMoreBtn from './LoadMore';
 
 
 class LoadMore extends Component {
   render() {
     return (
-      <div>
-        LoadMore
-      </div>
+      <LoadMoreBtn onClick={this.props.handleLoadMore}>
+        <p>{this.props.text}</p>
+      </LoadMoreBtn>
     );
   }
 }
