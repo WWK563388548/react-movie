@@ -50,9 +50,10 @@ class Home extends Component {
         fetch(para)
         .then(res => res.json())
         .then(res => {
+            const newState = this.state.movies;
             console.log(res);
             this.setState({
-                movies: [...this.state.movies, res.results],
+                movies: newState.concat(res.results),
                 heroImage: this.state.heroImage || res.results[0],
                 loading: false,
                 currentPage: res.page,
@@ -83,12 +84,12 @@ class Home extends Component {
                     </div> : null
                 }
                 <HomeGrid>
-                    {this.state.movies[0] && 
+                    {this.state.movies && 
                         <Grid 
                             header={this.state.searchTerm ? 'Search Result' : 'Popular Movies'}
                             loading={this.state.loading}
                         >
-                            {this.state.movies[0].map((element, id) => {
+                            {this.state.movies.map((element, id) => {
                                 return (
                                     <MovieThumb
                                         key={id}
@@ -100,6 +101,9 @@ class Home extends Component {
                                 )
                             })}
                         </Grid>}
+                        {this.state.loading ? <Spinner /> : null}
+                        {(this.state.currentPage < this.state.totalPages && !this.state.loading) ? 
+                            <LoadMore text='Load More' onClick={this.loadMoreItems} /> : null }
                 </HomeGrid>
     
             </div>

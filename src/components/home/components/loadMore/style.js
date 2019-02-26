@@ -8,6 +8,7 @@ export const LoadMoreBtn = styled.div`
     color: #fff;
     cursor: pointer;
     transition: all 0.3s;
+    border-radius: 50px;
     p {
         font-family: 'Abel', sans-serif;
         font-size:42px;
