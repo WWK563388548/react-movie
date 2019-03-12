@@ -9,8 +9,8 @@ import './meter.css';
 
 library.add(faFilm)
 const IMAGE_BASE_URL = "http://image.tmdb.org/t/p/";
-const POSTER_SIZE = "w1280";
-const BACKDROP_SIZE = "w500";
+const POSTER_SIZE = "w500";
+const BACKDROP_SIZE = "w1280";
 
 class MovieInfo extends Component {
     render() {
@@ -23,7 +23,7 @@ class MovieInfo extends Component {
                 <MovieInfoContent>
                     <MovieInfoThumb>
                         <MovieThumb 
-                            image={this.props.movie.poster_path ? `url('${IMAGE_BASE_URL}${POSTER_SIZE}${this.props.movie.poster_path}')` : NoImage}
+                            image={this.props.movie.poster_path ? `${IMAGE_BASE_URL}${POSTER_SIZE}${this.props.movie.poster_path}` : NoImage}
                             clickable={false}
                         />
                     </MovieInfoThumb>
@@ -51,7 +51,7 @@ class MovieInfo extends Component {
                             right: "40px",
                             color: "#fff",
                         }} 
-                        icon={["fas", "fa-file"]}
+                        icon="film"
                         size="5x"
                     />
                 </MovieInfoContent>
